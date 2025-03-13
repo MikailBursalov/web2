@@ -8,6 +8,7 @@ export default function Home() {
       <SearchSection />
       <SuggestedListings />
       <PopularADS />
+      <div>Regions</div>
     </div>
   );
 }
