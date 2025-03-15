@@ -1,7 +1,53 @@
+"use client";
 import Image from "next/image";
 import { DotIcon, HeartIcon } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 const suggestedListingsData = [
+  {
+    image: "/suggestedListings/image1.jpg",
+    isInFavorite: false,
+    price: 50000,
+    paymentPeriod: "month",
+    roomCount: 4,
+    area: 134,
+    floor: 3,
+    totalFloors: 9,
+    address: "8-й м-н, дом 17, Октябрьский район, Бишкек, 720075",
+  },
+  {
+    image: "/suggestedListings/image2.jpg",
+    isInFavorite: false,
+    price: 890000,
+    paymentPeriod: "year",
+    roomCount: 3,
+    area: 105,
+    floor: 2,
+    totalFloors: 12,
+    address: "8-й м-н, дом 17, Октябрьский район, Бишкек, 720075",
+  },
+  {
+    image: "/suggestedListings/image3.jpg",
+    isInFavorite: true,
+    price: 12000,
+    paymentPeriod: "month",
+    roomCount: 1,
+    area: 52,
+    floor: 8,
+    totalFloors: 14,
+    address: "Микрорайон Джал-23,Ленинский район, Бишкек, 720044, 5 этажей",
+  },
+  {
+    image: "/suggestedListings/image4.jpg",
+    isInFavorite: false,
+    price: 30000,
+    paymentPeriod: "month",
+    roomCount: 2,
+    area: 78,
+    floor: 5,
+    totalFloors: 20,
+    address: "Улица Токтогула, 13, Первомайский район, Бишкек, 720001, 1 этаж",
+  },
   {
     image: "/suggestedListings/image1.jpg",
     isInFavorite: false,
@@ -49,6 +95,7 @@ const suggestedListingsData = [
 ];
 
 export const SuggestedListings = () => {
+  const { push } = useRouter();
   return (
     <section className={`my-5`}>
       <div className={`max-w-screen-2xl mx-auto`}>
@@ -62,7 +109,7 @@ export const SuggestedListings = () => {
             {suggestedListingsData.map((item, id) => (
               <li
                 key={id}
-                className="overflow-hidden border rounded-xl border-black  max-w-[330px] cursor-pointer"
+                className="overflow-hidden border rounded-xl border-black cursor-pointer"
               >
                 <div>
                   <div className="relative max-h-[290px] overflow-hidden rounded-t-xl">
@@ -101,6 +148,17 @@ export const SuggestedListings = () => {
               </li>
             ))}
           </ul>
+          <div>
+            <button
+              className={`py-3 text-2xl text-blue-600 bg-blue-200/80 w-full rounded-lg font-semibold my-5 cursor-pointer md:hover:bg-blue-300 duration-300`}
+              onClick={() => {
+                push("/catalog");
+                localStorage.setItem("catalog", "suggestions");
+              }}
+            >
+              Показать еще
+            </button>
+          </div>
         </div>
       </div>
     </section>
