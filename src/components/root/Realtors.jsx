@@ -1,37 +1,37 @@
-import Image from "next/image";
+import Image from 'next/image'
 
 const realtorsData = [
   {
-    avatar: "/realtors/woman-ava1.jpg",
-    name: "Айсулуу Тыныбекова",
+    avatar: '/realtors/woman-ava1.jpg',
+    name: 'Айсулуу Тыныбекова',
     offersCount: 8,
   },
   {
-    avatar: "/realtors/woman-ava2.jpg",
-    name: "Аида Сапарбек кызы",
+    avatar: '/realtors/woman-ava2.jpg',
+    name: 'Аида Сапарбек кызы',
     offersCount: 5,
   },
   {
-    avatar: "/realtors/boy-ava4.jpg",
-    name: "Дастан Рысбеков",
+    avatar: '/realtors/boy-ava4.jpg',
+    name: 'Дастан Рысбеков',
     offersCount: 2,
   },
   {
-    avatar: "/realtors/boy-ava3.png",
-    name: "Микаиль Бурсалов",
+    avatar: '/realtors/boy-ava3.png',
+    name: 'Микаиль Бурсалов',
     offersCount: 4,
   },
   {
-    avatar: "/realtors/boy-ava2.jpg",
-    name: "Эркебулан Дуйшеналиев",
+    avatar: '/realtors/boy-ava2.jpg',
+    name: 'Эркебулан Дуйшеналиев',
     offersCount: 9,
   },
   {
-    avatar: "/realtors/boy-ava1.avif",
-    name: "Касым Барыктабасов",
+    avatar: '/realtors/boy-ava1.avif',
+    name: 'Касым Барыктабасов',
     offersCount: 1,
   },
-];
+]
 
 export const Realtors = () => {
   return (
@@ -60,12 +60,12 @@ export const Realtors = () => {
                 >
                   {item.name}
                 </h3>
-                <p>{item.offersCount + " предложений"}</p>
+                <p>{item.offersCount + ' предложений'}</p>
               </div>
             </li>
           ))}
         </ul>
       </div>
     </div>
-  );
-};
+  )
+}

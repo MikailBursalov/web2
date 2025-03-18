@@ -1,5 +1,5 @@
-import { PopularADSContent } from "./PopularADSContent";
-import { Realtors } from "./Realtors";
+import { PopularADSContent } from './PopularADSContent'
+import { Realtors } from './Realtors'
 
 export const PopularADS = () => {
   return (
@@ -15,5 +15,5 @@ export const PopularADS = () => {
         </div>
       </div>
     </section>
-  );
-};
+  )
+}

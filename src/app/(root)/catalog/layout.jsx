@@ -1,3 +1,3 @@
 export default function CatalogLayout({ children }) {
-  return <div>{children}</div>;
+  return <div>{children}</div>
 }
