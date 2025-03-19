@@ -2,9 +2,11 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import { DotIcon, HeartIcon } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 
 const popularAds = [
   {
+    id: 1,
     image: '/suggestedListings/image1.jpg',
     isInFavorite: false,
     price: 50000,
@@ -16,6 +18,7 @@ const popularAds = [
     address: '8-й м-н, дом 17, Октябрьский район, Бишкек, 720075',
   },
   {
+    id: 2,
     image: '/suggestedListings/image2.jpg',
     isInFavorite: false,
     price: 890000,
@@ -27,6 +30,7 @@ const popularAds = [
     address: '8-й м-н, дом 17, Октябрьский район, Бишкек, 720075',
   },
   {
+    id: 3,
     image: '/suggestedListings/image3.jpg',
     isInFavorite: true,
     price: 12000,
@@ -38,6 +42,55 @@ const popularAds = [
     address: 'Микрорайон Джал-23,Ленинский район, Бишкек, 720044, 5 этажей',
   },
   {
+    id: 4,
+    image: '/suggestedListings/image4.jpg',
+    isInFavorite: false,
+    price: 30000,
+    paymentPeriod: 'month',
+    roomCount: 2,
+    area: 78,
+    floor: 5,
+    totalFloors: 20,
+    address: 'Улица Токтогула, 13, Первомайский район, Бишкек, 720001, 1 этаж',
+  },
+  {
+    id: 5,
+    image: '/suggestedListings/image1.jpg',
+    isInFavorite: false,
+    price: 50000,
+    paymentPeriod: 'month',
+    roomCount: 4,
+    area: 134,
+    floor: 3,
+    totalFloors: 9,
+    address: '8-й м-н, дом 17, Октябрьский район, Бишкек, 720075',
+  },
+  {
+    id: 6,
+    image: '/suggestedListings/image2.jpg',
+    isInFavorite: false,
+    price: 890000,
+    paymentPeriod: 'year',
+    roomCount: 3,
+    area: 105,
+    floor: 2,
+    totalFloors: 12,
+    address: '8-й м-н, дом 17, Октябрьский район, Бишкек, 720075',
+  },
+  {
+    id: 7,
+    image: '/suggestedListings/image3.jpg',
+    isInFavorite: true,
+    price: 12000,
+    paymentPeriod: 'month',
+    roomCount: 1,
+    area: 52,
+    floor: 8,
+    totalFloors: 14,
+    address: 'Микрорайон Джал-23,Ленинский район, Бишкек, 720044, 5 этажей',
+  },
+  {
+    id: 8,
     image: '/suggestedListings/image4.jpg',
     isInFavorite: false,
     price: 30000,
@@ -53,6 +106,11 @@ const popularAds = [
 export const PopularADSContent = () => {
   const selling = ['Жилая', 'Загородная', 'Коммерческая']
   const [selectedSelling, setSelectedSelling] = useState('Жилая')
+
+  const { push } = useRouter()
+  const handleClickProduct = (id) => {
+    push(`/catalog/${id}`)
+  }
   return (
     <div>
       <div className={`flex justify-between items-center`}>
@@ -78,6 +136,7 @@ export const PopularADSContent = () => {
           {popularAds.map((item, id) => (
             <li
               key={id}
+              onClick={() => handleClickProduct(item.id)}
               className="overflow-hidden border rounded-xl border-black w-full cursor-pointer group" // Убрали max-w-[330px] и добавили w-full
             >
               <div>
