@@ -1,6 +1,6 @@
 'use client'
 import React, { useState } from 'react'
-import { Auth } from '@/components/root/auth/Auth'
+import { Auth } from '@/components/common/auth/Auth'
 export const UserMenu = () => {
   const [modal, setModal] = useState(false)
   return (
