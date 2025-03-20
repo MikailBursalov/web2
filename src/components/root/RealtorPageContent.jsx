@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react"
+
 const realtorsData = [
   {
     id: 1,
@@ -58,6 +60,12 @@ const realtorsData = [
   },
 ]
 export const RealtorPageContent = () => {
+  const [realtorsList, setRealtorsList] = useState([])
+
+  useEffect (()=>{
+    console.log('realtors page: ');
+    
+  },[]) 
   return (
     <div>
       <div>lfl</div>

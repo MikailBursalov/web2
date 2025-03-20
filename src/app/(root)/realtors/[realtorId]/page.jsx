@@ -1,7 +1,7 @@
+import { RealtorPageContent } from "@/components/root/RealtorPageContent";
+
 export default function RealtorsPage() {
   return (
-    <div>
-      <div>Realtors</div>
-    </div>
+    <RealtorPageContent/>
   )
 }
