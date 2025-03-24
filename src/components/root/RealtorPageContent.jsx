@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react"
+'use client'
+import { useEffect, useState } from 'react'
 
 const realtorsData = [
   {
@@ -62,10 +63,9 @@ const realtorsData = [
 export const RealtorPageContent = () => {
   const [realtorsList, setRealtorsList] = useState([])
 
-  useEffect (()=>{
-    console.log('realtors page: ');
-    
-  },[]) 
+  useEffect(() => {
+    console.log('realtors page: ')
+  }, [])
   return (
     <div>
       <div>lfl</div>
