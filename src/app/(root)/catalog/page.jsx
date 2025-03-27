@@ -7,10 +7,11 @@ export default function CatalogPage() {
       <div
         className={`max-w-screen-2xl mx-auto flex justify-between items-start gap-5`}
       >
-        <div className={`w-1/5`}>
+        <div className={`w-1/5 px-2`}>
           <CatalogFilter />
+
         </div>
-        <div className={`w-4/5`}>
+        <div className={`w-4/5 px-2`}>
           <CatalogContent />
         </div>
       </div>
