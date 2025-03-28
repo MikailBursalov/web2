@@ -1,11 +1,11 @@
 import axios from 'axios'
 import Cookies from 'js-cookie'
+import { NEXT_BASE_URL } from '@/service/api/config'
 
 axios.defaults.withCredentials = true
 
 const api = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_BASE_URL,
-  headers: { 'Content-Type': 'application/json' },
+  baseURL: NEXT_BASE_URL,
 })
 
 const refreshToken = async () => {
@@ -15,11 +15,7 @@ const refreshToken = async () => {
       { refresh_token: Cookies.get('refresh_token') }
     )
     const newAccessToken = response.data.access_token
-    Cookies.set('access_token', newAccessToken, {
-      expires: 1 / 24, // 1 час
-      secure: true,
-      sameSite: 'Strict',
-    })
+    Cookies.set('access_token', newAccessToken)
     return newAccessToken
   } catch (error) {
     console.error('Refresh token failed', error)

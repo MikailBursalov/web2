@@ -1,8 +1,11 @@
 'use client'
 import React, { useState } from 'react'
 import { Auth } from '@/components/common/auth/Auth'
+import { LoginForm } from '@/components/common/auth/LoginForm'
+import { RegisterForm } from '@/components/common/auth/RegisterForm'
 export const UserMenu = () => {
   const [modal, setModal] = useState(false)
+  const [isLogin, setIsLogin] = useState(true)
   return (
     <>
       <div className="flex items-center gap-2">
@@ -16,7 +19,18 @@ export const UserMenu = () => {
           Войти
         </button>
       </div>
-      {modal && <Auth onClose={() => setModal(false)} />}
+      {modal &&
+        (isLogin ? (
+          <LoginForm
+            close={() => setModal(!modal)}
+            changeForm={() => setIsLogin(!isLogin)}
+          />
+        ) : (
+          <RegisterForm
+            close={() => setModal(!modal)}
+            changeForm={() => setIsLogin(!isLogin)}
+          />
+        ))}
     </>
   )
 }

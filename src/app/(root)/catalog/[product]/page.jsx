@@ -8,11 +8,11 @@ export default function ProductPage() {
     <main>
       <section className={`max-w-screen-2xl mx-auto`}>
         <div className={`flex justify-between items-start gap-5`}>
-          <div className={`w-3/4`}>
+          <div className={`w-2/3`}>
             <ProductTitle />
             <ProductImages />
           </div>
-          <div className={`w-1/4 space-y-5`}>
+          <div className={`w-1/3 space-y-5`}>
             <ProductPricing />
             <ProductRealtor />
           </div>
