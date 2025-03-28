@@ -14,6 +14,8 @@ import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { Eye, EyeOff, XIcon } from 'lucide-react'
 import { Login } from '@/service/api/auth/login'
+import Cookies from 'js-cookie'
+import { useAuth } from '@/service/providers/AuthProvider'
 
 export const LoginForm = ({ close, changeForm }) => {
   const [showPassword, setShowPassword] = useState(false)
@@ -33,18 +35,34 @@ export const LoginForm = ({ close, changeForm }) => {
     },
   })
 
+  const { setUser, setToken } = useAuth()
+
   const onSubmit = async (values) => {
     try {
-      await Login(values)
-      console.log('Вход выполнен')
+      const res = await Login(values)
+      if (res && res.data) {
+        Cookies.set('token', res.data.token)
+        Cookies.set('role', res.data.user.role)
+        Cookies.set('user', encodeURIComponent(JSON.stringify(res.data.user)))
+
+        setUser(res.data.user)
+        setToken(res.data.token)
+        close()
+      }
     } catch (error) {
       console.error('Ошибка:', error)
     }
   }
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
-      <div className="w-[400px] sm:w-[450px] md:w-[500px] min-h-[400px] bg-white p-6 rounded-lg shadow-lg">
+    <div
+      className="fixed inset-0 flex items-center justify-center bg-black/50 z-50"
+      onClick={close}
+    >
+      <div
+        className="w-[400px] sm:w-[450px] md:w-[500px] min-h-[400px] bg-white p-6 rounded-lg shadow-lg"
+        onClick={(e) => e.stopPropagation()}
+      >
         <div className="flex justify-between items-center mb-5">
           <h1 className="text-xl font-bold ">Войти</h1>
           <button onClick={close} className="cursor-pointer">

@@ -60,8 +60,14 @@ export const RegisterForm = ({ close, changeForm }) => {
   }
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
-      <div className="w-[400px] sm:w-[450px] md:w-[500px] min-h-[400px] bg-white p-6 rounded-lg shadow-lg">
+    <div
+      className="fixed inset-0 flex items-center justify-center bg-black/50 z-50"
+      onClick={close}
+    >
+      <div
+        className="w-[400px] sm:w-[450px] md:w-[500px] min-h-[400px] bg-white p-6 rounded-lg shadow-lg"
+        onClick={(e) => e.stopPropagation()}
+      >
         <div className="flex justify-between items-center mb-5">
           <h1 className="text-xl font-bold ">Регистрация</h1>
           <button onClick={close} className="cursor-pointer">
