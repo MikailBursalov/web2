@@ -6,8 +6,11 @@ export const SearchSection = () => {
   return (
     <section className="bg-[url('https://static.cdn-cian.ru/frontend/frontend-mainpage/banner-bg@2x.e6b6c557e44b8141d98a.jpg')] bg-center bg-cover bg-no-repeat">
       <div className={`container mx-auto p-20 py-32 space-y-5`}>
-        <h1 className="text-white text-4xl font-semibold mb-5 pb-1 border-b-2 border-black px-2  inline-block">
-          Если недвижимость, то Циан
+        <h1 className="text-white text-4xl font-semibold mb-5 pb-1 px-2  inline-block">
+          Если недвижимость, то{' '}
+          <span className="text-4xl pb-2 font-bold bg-gradient-to-r from-[rgb(12,130,237)] to-[rgb(5,25,34)] bg-clip-text text-transparent">
+            EasyRent
+          </span>
         </h1>
 
         <div className={`space-y-2`}>
