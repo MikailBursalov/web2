@@ -19,7 +19,7 @@ export const UserMenu = () => {
   const router = useRouter()
 
   const getInitials = () => {
-    return user?.name?.toUpperCase() || 'U'
+    return user?.name?.toUpperCase().slice(0, 1) || 'U'
   }
 
   useEffect(() => {
@@ -38,9 +38,7 @@ export const UserMenu = () => {
               <DropdownMenuTrigger>
                 <Avatar className="cursor-pointer">
                   <AvatarImage src={user.avatar || ''} alt={user.name} />
-                  <AvatarFallback className={`size-20 text-blue-500`}>
-                    {getInitials()}
-                  </AvatarFallback>
+                  <AvatarFallback>{getInitials()}</AvatarFallback>
                 </Avatar>
               </DropdownMenuTrigger>
               <DropdownMenuContent className="w-40 mt-2">

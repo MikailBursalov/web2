@@ -1,3 +1,3 @@
 export default function RealtorsPageLayout({ children }) {
-  return <div>{children}</div>
+  return <main>{children}</main>
 }
