@@ -145,6 +145,7 @@ export const PopularADSContent = () => {
                     src={item.image}
                     alt={item.address || 'Фото квартиры'}
                     fill
+                    sizes={'100vh'}
                     className="object-cover w-full h-full md:group-hover:scale-105 duration-1000"
                   />
                   <span className="absolute top-2 right-2 bg-black/50 md:hover:bg-black/70 cursor-pointer duration-300 p-2 rounded-full">

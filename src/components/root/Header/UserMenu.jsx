@@ -28,26 +28,29 @@ export const UserMenu = () => {
   return (
     <>
       <div className="flex items-center gap-2">
-        <button className="bg-blue-600 text-white rounded-md px-3 py-1">
-          + Подать за 0 сом
-        </button>
         {user ? (
-          <DropdownMenu>
-            <DropdownMenuTrigger>
-              <Avatar className="cursor-pointer">
-                <AvatarImage src={user.avatar || ''} alt={user.name} />
-                <AvatarFallback className={`size-20 text-blue-500`}>
-                  {getInitials()}
-                </AvatarFallback>
-              </Avatar>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-40 mt-2">
-              <DropdownMenuItem onClick={() => router.push('/profile')}>
-                Профиль
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={logout}>Выйти</DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+          <>
+            <button className="bg-blue-600 text-white rounded-md px-3 py-1">
+              + Подать за 0 сом
+            </button>
+
+            <DropdownMenu>
+              <DropdownMenuTrigger>
+                <Avatar className="cursor-pointer">
+                  <AvatarImage src={user.avatar || ''} alt={user.name} />
+                  <AvatarFallback className={`size-20 text-blue-500`}>
+                    {getInitials()}
+                  </AvatarFallback>
+                </Avatar>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-40 mt-2">
+                <DropdownMenuItem onClick={() => router.push('/profile')}>
+                  Профиль
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={logout}>Выйти</DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </>
         ) : (
           <button
             onClick={() => setModal(!modal)}
@@ -60,12 +63,18 @@ export const UserMenu = () => {
       {modal &&
         (isLogin ? (
           <LoginForm
-            close={() => setModal(!modal)}
+            close={() => {
+              setModal(!modal)
+              setIsLogin(true)
+            }}
             changeForm={() => setIsLogin(!isLogin)}
           />
         ) : (
           <RegisterForm
-            close={() => setModal(!modal)}
+            close={() => {
+              setModal(!modal)
+              setIsLogin(true)
+            }}
             changeForm={() => setIsLogin(!isLogin)}
           />
         ))}

@@ -45,7 +45,7 @@ const data = [
 export const Footer = () => {
   return (
     <footer className={`bg-[#f4f4f4] py-5`}>
-      <div className={`container mx-auto space-y-5`}>
+      <div className={`max-w-screen-2xl mx-auto px-2 space-y-5`}>
         <div
           className={`grid  grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5`}
         >

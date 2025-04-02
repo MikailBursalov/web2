@@ -110,7 +110,7 @@ export const SuggestedListings = () => {
   }
   return (
     <section className={`my-5`}>
-      <div className={`max-w-screen-2xl mx-auto`}>
+      <div className={`max-w-screen-2xl mx-auto px-2`}>
         <div>
           <h1 className={`text-3xl font-semibold mb-3`}>
             Могут подойти для вас

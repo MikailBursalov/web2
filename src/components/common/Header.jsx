@@ -12,7 +12,7 @@ export const Header = () => {
 
   return (
     <>
-      <header className="container mx-auto flex justify-between items-center relative py-3">
+      <header className="max-w-screen-2xl px-2 mx-auto flex justify-between items-center relative py-3">
         <Logo />
         <div className="flex items-center justify-between gap-5">
           <Link href={'/catalog'}>Каталог</Link>

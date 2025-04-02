@@ -46,7 +46,7 @@ const cities = [
 export const OffersOnRegions = () => {
   return (
     <section className={`bg-gray-100 py-5`}>
-      <div className={`max-w-screen-2xl mx-auto`}>
+      <div className={`max-w-screen-2xl mx-auto px-2`}>
         <div>
           <h1 className={`text-2xl font-semibold my-5`}>Квартиры по районам</h1>
           <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-4 gap-y-1">

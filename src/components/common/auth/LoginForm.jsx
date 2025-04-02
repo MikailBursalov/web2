@@ -40,6 +40,7 @@ export const LoginForm = ({ close, changeForm }) => {
   const onSubmit = async (values) => {
     try {
       const res = await Login(values)
+
       if (res && res.data) {
         Cookies.set('token', res.data.token)
         Cookies.set('role', res.data.user.role)
@@ -50,7 +51,30 @@ export const LoginForm = ({ close, changeForm }) => {
         close()
       }
     } catch (error) {
-      console.error('Ошибка:', error)
+      if (error.response) {
+        const status = error.response.status
+
+        if (status === 400) {
+          form.setError('email', {
+            type: 'manual',
+            message: 'Введите корректные данные.',
+          })
+          form.setError('password', {
+            type: 'manual',
+            message: 'Введите корректные данные.',
+          })
+        } else if (status >= 500) {
+          form.setError('_', {
+            type: 'manual',
+            message: 'Ошибка сервера. Попробуйте позже.',
+          })
+        }
+      } else {
+        form.setError('_', {
+          type: 'manual',
+          message: 'Неизвестная ошибка. Попробуйте позже.',
+        })
+      }
     }
   }
 
@@ -113,6 +137,12 @@ export const LoginForm = ({ close, changeForm }) => {
                 </FormItem>
               )}
             />
+            {form.formState.errors._ && (
+              <div className="text-red-500 text-sm text-center">
+                {form.formState.errors._.message}
+              </div>
+            )}
+
             <div className="flex items-center gap-2">
               <span>Еще нет аккаунта?</span>
               <button
