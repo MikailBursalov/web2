@@ -1,13 +1,7 @@
 'use client'
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useParams, useRouter } from 'next/navigation'
-import {
-  HeartIcon,
-  HomeIcon,
-  HousePlugIcon,
-  HousePlus,
-  HousePlusIcon,
-} from 'lucide-react'
+import { HeartIcon, HomeIcon, HousePlusIcon } from 'lucide-react'
 import Link from 'next/link'
 import { useAuth } from '@/service/providers/AuthProvider'
 
@@ -37,9 +31,6 @@ export const ProfileNav = () => {
 
   const { token, user } = useAuth()
 
-  useEffect(() => {
-    console.log(user)
-  }, [token])
   return (
     <div className="bg-gray-100 rounded-md overflow-hidden">
       <div className="w-full">
@@ -59,7 +50,7 @@ export const ProfileNav = () => {
             href={item.link}
             className={`flex items-center gap-4 justify-start p-3 duration-300 md:hover:text-blue-500 ${
               params.section === item.params
-                ? 'bg-blue-500/50 border-l-4 md:hover:text-white border-l-blue-500 text-blue-600'
+                ? 'bg-blue-500/30 border-l-4 md:hover:text-white border-l-blue-500 text-blue-600'
                 : ''
             }`}
             key={index}

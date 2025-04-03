@@ -21,10 +21,6 @@ export const UserMenu = () => {
   const getInitials = () => {
     return user?.name?.toUpperCase().slice(0, 1) || 'U'
   }
-
-  useEffect(() => {
-    console.log(user)
-  }, [user])
   return (
     <>
       <div className="flex items-center gap-2">
