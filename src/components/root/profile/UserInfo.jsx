@@ -11,6 +11,8 @@ export const UserInfo = () => {
   const [genderSelectOpen, setGenderSelectOpen] = useState(false)
   const [selectedGender, setSelectedGender] = useState(genderData[2])
 
+  const [isPasswordChangeOpen, setIsPasswordChangeOpen] = useState(false)
+
   const genderRef = useRef(null)
   const { user } = useAuth()
 
@@ -131,10 +133,65 @@ export const UserInfo = () => {
           </div>
         </div>
         <div className={`bg-white rounded-md p-3 mt-4`}>
-          <div>
+          <div className={`flex justify-between items-center gap-4`}>
             <h1 className={`text-xl font-bold`}>Данные входа</h1>
             <div>
-              <button>Изменить пароль</button>
+              <button
+                className={`bg-blue-500/20 text-blue-500 md:hover:bg-blue-500/30 py-2 px-5 rounded-md text-xl`}
+                onClick={() => {
+                  !isPasswordChangeOpen
+                    ? setIsPasswordChangeOpen(true)
+                    : setIsPasswordChangeOpen(false)
+                }}
+              >
+                {isPasswordChangeOpen ? 'Сохранить' : 'Изменить пароль'}
+              </button>
+            </div>
+          </div>
+          <div
+            className={`transition-all duration-500 ease-in-out overflow-hidden ${
+              isPasswordChangeOpen
+                ? 'max-h-[500px] opacity-100 scale-y-100'
+                : 'max-h-0 opacity-0 scale-y-0'
+            }`}
+          >
+            <div className={`flex justify-between items-center gap-4`}>
+              <div className={`flex-1`}>
+                <label className={`text-xl text-gray-600 font-normal`}>
+                  Старый пароль
+                </label>
+                <input
+                  type="text"
+                  placeholder={'old password'}
+                  className={`mt-2 text-xl font-semibold border rounded-md py-2 px-3 border-slate-500 w-full`}
+                  value={''}
+                  onChange={(e) => null}
+                />
+              </div>
+              <div className={`flex-1`}>
+                <label className={`text-xl text-gray-600 font-normal`}>
+                  Новый пароль
+                </label>
+                <input
+                  type="text"
+                  placeholder={'new password'}
+                  className={`mt-2 text-xl font-semibold border rounded-md py-2 px-3 border-slate-500 w-full`}
+                  value={''}
+                  onChange={(e) => null}
+                />
+              </div>
+              <div className={`flex-1`}>
+                <label className={`text-xl text-gray-600 font-normal`}>
+                  Подствердите пароль
+                </label>
+                <input
+                  type="text"
+                  placeholder={'confirm password'}
+                  className={`mt-2 text-xl font-semibold border rounded-md py-2 px-3 border-slate-500 w-full`}
+                  value={''}
+                  onChange={(e) => null}
+                />
+              </div>
             </div>
           </div>
         </div>
