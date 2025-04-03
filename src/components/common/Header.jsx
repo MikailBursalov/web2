@@ -7,7 +7,7 @@ import Link from 'next/link'
 export const Header = () => {
   return (
     <>
-      <header className="max-w-screen-2xl px-2 mx-auto flex justify-between items-center py-3">
+      <header className="px-2 max-w-screen-2xl mx-auto w-full flex justify-between items-center py-3">
         <Logo />
         <div className="flex items-center justify-between gap-5">
           <Link href={'/catalog'}>Каталог</Link>

@@ -38,7 +38,7 @@ export const UserMenu = () => {
                 </Avatar>
               </DropdownMenuTrigger>
               <DropdownMenuContent className="w-40 mt-2">
-                <DropdownMenuItem onClick={() => router.push('/profile')}>
+                <DropdownMenuItem onClick={() => router.push('/profile/user')}>
                   Профиль
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={logout}>Выйти</DropdownMenuItem>

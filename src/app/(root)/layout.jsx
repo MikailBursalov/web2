@@ -4,11 +4,11 @@ import { ChatBot } from '@/components/root/Header/ChatBot'
 
 export default function RootLayout({ children }) {
   return (
-    <>
+    <div className="flex flex-col min-h-screen">
       <Header />
-      {children}
+      <main className="flex-grow">{children}</main>
       <Footer />
       <ChatBot />
-    </>
+    </div>
   )
 }
