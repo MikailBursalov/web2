@@ -1,7 +1,7 @@
 'use client'
 import React, { useEffect, useState } from 'react'
 import { RegisterForm } from '@/components/common/auth/RegisterForm'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import { useAuth } from '@/service/providers/AuthProvider'
 import { LoginForm } from '@/components/common/auth/LoginForm'
 import {
@@ -14,9 +14,6 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 export const UserMenu = () => {
   const [modal, setModal] = useState(false)
   const [isLogin, setIsLogin] = useState(true)
-
-  const searchParams = useSearchParams()
-  const showLogin = searchParams.get('login') === '1'
 
   const { user, logout } = useAuth()
   const router = useRouter()
