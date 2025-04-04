@@ -2,12 +2,19 @@
 import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { ProfileNav } from '@/components/root/profile/ProfileNav'
+import { useAuth } from '@/service/providers/AuthProvider'
 
 export default function ProfileLayout({ children }) {
+  const { user, token } = useAuth()
   const { push } = useRouter()
   useEffect(() => {
-    push('/profile/user')
-  }, [])
+    if (!user && !token) {
+      push('/') // редирект
+      setTimeout(() => {
+        window.dispatchEvent(new Event('open-login-modal'))
+      }, 100) // маленькая задержка, чтобы успел отрендериться UserMenu
+    }
+  }, [user, token])
   return (
     <main>
       <div className={`w-full py-4 bg-gray-100 my-5 `}>

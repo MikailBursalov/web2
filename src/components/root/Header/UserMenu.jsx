@@ -1,7 +1,7 @@
 'use client'
 import React, { useEffect, useState } from 'react'
 import { RegisterForm } from '@/components/common/auth/RegisterForm'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { useAuth } from '@/service/providers/AuthProvider'
 import { LoginForm } from '@/components/common/auth/LoginForm'
 import {
@@ -15,12 +15,29 @@ export const UserMenu = () => {
   const [modal, setModal] = useState(false)
   const [isLogin, setIsLogin] = useState(true)
 
+  const searchParams = useSearchParams()
+  const showLogin = searchParams.get('login') === '1'
+
   const { user, logout } = useAuth()
   const router = useRouter()
 
   const getInitials = () => {
     return user?.name?.toUpperCase().slice(0, 1) || 'U'
   }
+
+  useEffect(() => {
+    const openLogin = () => {
+      setModal(true)
+      setIsLogin(true)
+    }
+
+    window.addEventListener('open-login-modal', openLogin)
+
+    return () => {
+      window.removeEventListener('open-login-modal', openLogin)
+    }
+  }, [])
+
   return (
     <>
       <div className="flex items-center gap-2">
