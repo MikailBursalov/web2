@@ -5,11 +5,13 @@ import { ProfileNav } from '@/components/root/profile/ProfileNav'
 import { useAuth } from '@/service/providers/AuthProvider'
 
 export default function ProfileLayout({ children }) {
-  const { user, token } = useAuth()
+  const { user, token, loading } = useAuth()
   const { push } = useRouter()
   const [checkedAuth, setCheckedAuth] = useState(false)
 
   useEffect(() => {
+    if (loading) return
+
     if (!user && !token) {
       push('/')
       setTimeout(() => {
@@ -18,9 +20,9 @@ export default function ProfileLayout({ children }) {
     } else {
       setCheckedAuth(true)
     }
-  }, [user, token])
+  }, [user, token, loading])
 
-  if (!checkedAuth) return null // ничего не рендерим, пока не знаем результат проверки
+  if (loading || !checkedAuth) return null // или <Spinner /> если хочешь
 
   return (
     <main>

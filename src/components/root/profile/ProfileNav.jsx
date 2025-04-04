@@ -4,32 +4,35 @@ import { useParams, useRouter } from 'next/navigation'
 import { HeartIcon, HomeIcon, HousePlusIcon } from 'lucide-react'
 import Link from 'next/link'
 import { useAuth } from '@/service/providers/AuthProvider'
+import Cookies from 'js-cookie'
 
-const navData = [
-  {
-    name: 'Профиль',
-    icon: <HomeIcon />,
-    link: '/profile/user',
-    params: 'user',
-  },
-  {
-    name: 'Избранные',
-    icon: <HeartIcon />,
-    link: '/profile/wishlist',
-    params: 'wishlist',
-  },
-  {
-    name: 'Квартиры',
-    icon: <HousePlusIcon />,
-    link: '/profile/apartments',
-    params: 'apartments',
-  },
-]
 export const ProfileNav = () => {
-  const router = useRouter()
-  const params = useParams()
+  const role = Cookies.get('role')
 
-  const { token, user } = useAuth()
+  const navData = [
+    {
+      name: 'Профиль',
+      icon: <HomeIcon />,
+      link: '/profile/user',
+      params: 'user',
+    },
+    {
+      name: 'Избранные',
+      icon: <HeartIcon />,
+      link: '/profile/wishlist',
+      params: 'wishlist',
+    },
+    role === 'lordland'
+      ? {
+          name: 'Квартиры',
+          icon: <HousePlusIcon />,
+          link: '/profile/apartments',
+          params: 'apartments',
+        }
+      : null,
+  ]
+
+  const params = useParams()
 
   return (
     <div className="bg-gray-100 rounded-md overflow-hidden">

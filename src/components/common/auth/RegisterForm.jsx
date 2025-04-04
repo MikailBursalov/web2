@@ -56,21 +56,14 @@ export const RegisterForm = ({ close, changeForm }) => {
         changeForm()
       }
     } catch (error) {
+      console.log(error)
       if (error.response) {
         const status = error.response.status
 
         if (status === 400) {
-          form.setError('email', {
+          form.setError('_', {
             type: 'manual',
-            message: 'Введите корректные данные.',
-          })
-          form.setError('password', {
-            type: 'manual',
-            message: 'Введите корректные данные.',
-          })
-          form.setError('name', {
-            type: 'manual',
-            message: 'Введите корректные данные.',
+            message: error.response.data.message,
           })
         } else if (status >= 500) {
           form.setError('_', {
