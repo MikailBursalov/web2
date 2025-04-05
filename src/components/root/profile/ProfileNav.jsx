@@ -5,6 +5,7 @@ import { HeartIcon, HomeIcon, HousePlusIcon } from 'lucide-react'
 import Link from 'next/link'
 import { useAuth } from '@/service/providers/AuthProvider'
 import Cookies from 'js-cookie'
+import { Skeleton } from '@/components/ui/skeleton'
 
 export const ProfileNav = () => {
   const role = Cookies.get('role')
@@ -22,7 +23,7 @@ export const ProfileNav = () => {
       link: '/profile/wishlist',
       params: 'wishlist',
     },
-    role === 'lordland'
+    role === 'landlord'
       ? {
           name: 'Квартиры',
           icon: <HousePlusIcon />,
@@ -30,9 +31,10 @@ export const ProfileNav = () => {
           params: 'apartments',
         }
       : null,
-  ]
+  ].filter(Boolean)
 
   const params = useParams()
+  const { user, loading } = useAuth()
 
   return (
     <div className="bg-gray-100 rounded-md overflow-hidden">
@@ -41,10 +43,16 @@ export const ProfileNav = () => {
           <div className="bg-blue-500 h-32 w-full"></div>
           <div className="absolute left-1/2 top-10 transform -translate-x-1/2 size-28 bg-gray-400 rounded-full"></div>
         </div>
-        <div className="text-center pt-12 pb-4">
-          <h2 className="font-semibold text-lg">Микаиль Бурсалов</h2>
-          <h5 className="text-gray-600">2004.01005@manas.edu.kg</h5>
-        </div>
+        {loading ? (
+          <div>
+            <Skeleton />
+          </div>
+        ) : (
+          <div className="text-center pt-12 pb-4">
+            <h2 className="font-semibold text-lg">{user.name}</h2>
+            <h5 className="text-gray-600">{user.email}</h5>
+          </div>
+        )}
       </div>
       <div className="h-[1px] w-[90%] mx-auto bg-gray-500 my-4"></div>
       <nav className="space-y-3">
