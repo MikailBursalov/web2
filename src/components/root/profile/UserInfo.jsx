@@ -2,7 +2,7 @@
 import Image from 'next/image'
 import { useAuth } from '@/service/providers/AuthProvider'
 import { useEffect, useRef, useState } from 'react'
-import { ChevronUp, ChevronDown } from 'lucide-react'
+import { ChevronUp, ChevronDown, ChevronDownIcon } from 'lucide-react'
 
 const genderData = ['Мужской', 'Жеснкий', 'Не выбрано']
 
@@ -106,11 +106,11 @@ export const UserInfo = () => {
                 onClick={() => setGenderSelectOpen((prev) => !prev)}
               >
                 <span>{selectedGender}</span>
-                {genderSelectOpen ? (
-                  <ChevronUp size={20} />
-                ) : (
-                  <ChevronDown size={20} />
-                )}
+                <ChevronDownIcon
+                  className={`text-gray-400 transform transition-transform duration-300 ${
+                    genderSelectOpen ? 'rotate-180' : 'rotate-0'
+                  }`}
+                />
               </div>
 
               <div
