@@ -1,12 +1,13 @@
 'use client'
 import { XIcon } from 'lucide-react'
 import { ApartmentType } from '@/components/root/profile/landlord/ApartmentType'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { SelectPrice } from '@/components/root/profile/landlord/SelectPrice'
 import { AreaAndAmenities } from '@/components/root/profile/landlord/AreaAndAmenities'
-import { log } from 'next/dist/server/typescript/utils'
 import { ProductImages } from '@/components/root/profile/landlord/ProductImages'
 import { LocationPicker } from '@/components/root/profile/landlord/ProductLocation'
+import { api } from '@/service/api/axios'
+import { useAuth } from '@/service/providers/AuthProvider'
 
 export const AddProductModalWindow = ({ close }) => {
   const [data, setData] = useState({
@@ -26,6 +27,18 @@ export const AddProductModalWindow = ({ close }) => {
     amenities: [],
     images: [],
   })
+
+  const { token } = useAuth()
+
+  const onSubmit = async () => {
+    const response = await api.post('/properties', data, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+    if (response) {
+      console.log(response)
+    }
+  }
+
   return (
     <div
       className="fixed inset-0 flex items-center justify-center bg-black/50 z-50"
@@ -104,7 +117,7 @@ export const AddProductModalWindow = ({ close }) => {
         </div>
         <button
           className={`bg-blue-500 px-5 text-white text-xl rounded-md py-1 md:hover:bg-blue-500/30 md:hover:text-blue-500 md:hover:border md:hover:border-blue-500 w-full text-center mt-10 duration-300`}
-          onClick={() => console.log(data)}
+          onClick={onSubmit}
         >
           Подать объявление
         </button>
