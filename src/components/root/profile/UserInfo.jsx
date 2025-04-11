@@ -6,7 +6,7 @@ import { ChevronUp, ChevronDown, ChevronDownIcon } from 'lucide-react'
 import useUserStore from '@/service/stores/useUser.store'
 import { RingLoader } from 'react-spinners'
 
-const genderData = ['Мужской', 'Жеснкий', 'Не выбрано']
+const genderData = ['Мужской', 'Женский', 'Не выбрано']
 
 export const UserInfo = () => {
   const [userInfo, setUserInfo] = useState({ name: '', email: '' })
