@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation'
 const data = [
   // { name: 'Сравнение объектов', icon: <ListPlusIcon /> },
   // { name: 'Сообщения', icon: <MessageCircleMoreIcon /> },
-  { name: 'Избранные', icon: <HeartIcon />, link: '/wishlist' },
+  { name: 'Избранные', icon: <HeartIcon />, link: '/profile/wishlist' },
 ]
 
 export const HeaderControls = () => {

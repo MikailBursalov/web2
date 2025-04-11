@@ -11,7 +11,7 @@ export const Header = () => {
         <Logo />
         <div className="flex items-center justify-between gap-5">
           <Link href={'/catalog'}>Каталог</Link>
-          <NavigationMenu />
+          {/*<NavigationMenu />*/}
           <HeaderControls />
           <UserMenu />
         </div>
