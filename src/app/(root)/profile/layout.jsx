@@ -3,11 +3,15 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { ProfileNav } from '@/components/root/profile/ProfileNav'
 import { useAuth } from '@/service/providers/AuthProvider'
+import useUserStore from '@/service/stores/useUser.store'
+import { RingLoader } from 'react-spinners'
 
 export default function ProfileLayout({ children }) {
   const { user, token, loading } = useAuth()
+  const { userLoading } = useUserStore()
   const { push } = useRouter()
   const [checkedAuth, setCheckedAuth] = useState(false)
+  const { fetchProfile } = useUserStore()
 
   useEffect(() => {
     if (loading) return
@@ -19,8 +23,16 @@ export default function ProfileLayout({ children }) {
       }, 100)
     } else {
       setCheckedAuth(true)
+      fetchProfile(token)
     }
   }, [user, token, loading])
+
+  if (userLoading)
+    return (
+      <div className="fixed inset-0 top-1/4 left-1/2">
+        <RingLoader color="#0000FF" />
+      </div>
+    )
 
   if (loading || !checkedAuth) return null // или <Spinner /> если хочешь
 

@@ -31,8 +31,12 @@ export const AddProductModalWindow = ({ close }) => {
   const { token } = useAuth()
 
   const onSubmit = async () => {
+    console.log(data)
     const response = await api.post('/properties', data, {
-      headers: { Authorization: `Bearer ${token}` },
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'content-type': 'multipart/form-data',
+      },
     })
     if (response) {
       console.log(response)

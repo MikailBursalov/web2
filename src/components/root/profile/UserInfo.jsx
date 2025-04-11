@@ -3,6 +3,8 @@ import Image from 'next/image'
 import { useAuth } from '@/service/providers/AuthProvider'
 import { useEffect, useRef, useState } from 'react'
 import { ChevronUp, ChevronDown, ChevronDownIcon } from 'lucide-react'
+import useUserStore from '@/service/stores/useUser.store'
+import { RingLoader } from 'react-spinners'
 
 const genderData = ['Мужской', 'Жеснкий', 'Не выбрано']
 
@@ -14,7 +16,16 @@ export const UserInfo = () => {
   const [isPasswordChangeOpen, setIsPasswordChangeOpen] = useState(false)
 
   const genderRef = useRef(null)
-  const { user } = useAuth()
+  const { token } = useAuth()
+  const { profile, updateProfile } = useUserStore()
+
+  const UpdateProfileData = async () => {
+    const data = {
+      gender: selectedGender,
+    }
+
+    await updateProfile(token, data)
+  }
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -22,11 +33,13 @@ export const UserInfo = () => {
         setGenderSelectOpen(false)
       }
     }
+    console.log(profile)
     document.addEventListener('mousedown', handleClickOutside)
     return () => {
       document.removeEventListener('mousedown', handleClickOutside)
     }
-  }, [])
+  }, [profile])
+
   return (
     <div>
       <div className="bg-gray-100 rounded-md p-10">
@@ -50,10 +63,10 @@ export const UserInfo = () => {
             <div className={`space-y-5 flex-1`}>
               <div className={`flex flex-col gap-2`}>
                 <label className={`text-xl text-gray-600 font-normal`}>
-                  ФИО
+                  Имя
                 </label>
                 <input
-                  value={user?.name || userInfo.name}
+                  value={profile?.name || userInfo.name}
                   onChange={(e) =>
                     setUserInfo((prev) => ({ ...prev, name: e.target.value }))
                   }
@@ -67,7 +80,7 @@ export const UserInfo = () => {
                   Электронный адрес
                 </label>
                 <input
-                  value={user?.email || userInfo.email}
+                  value={profile?.email || userInfo.email}
                   onChange={(e) =>
                     setUserInfo((prev) => ({ ...prev, email: e.target.value }))
                   }
@@ -80,6 +93,7 @@ export const UserInfo = () => {
           </div>
           <div>
             <button
+              onClick={UpdateProfileData}
               className={`text-blue-500 bg-blue-500/30 md:hover:bg-blue-500/40 cursor-pointer duration-200 py-2 px-5 rounded-md text-xl`}
             >
               Редактировать
@@ -105,7 +119,7 @@ export const UserInfo = () => {
                 className="mt-2 flex items-center justify-between border border-slate-500 rounded-md py-2 px-3 cursor-pointer select-none text-xl font-semibold"
                 onClick={() => setGenderSelectOpen((prev) => !prev)}
               >
-                <span>{selectedGender}</span>
+                <span>{profile?.gender || selectedGender}</span>
                 <ChevronDownIcon
                   className={`text-gray-400 transform transition-transform duration-300 ${
                     genderSelectOpen ? 'rotate-180' : 'rotate-0'
