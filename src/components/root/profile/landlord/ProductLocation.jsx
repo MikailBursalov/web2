@@ -6,6 +6,7 @@ import {
   Autocomplete,
 } from '@react-google-maps/api'
 import { useRef, useState } from 'react'
+import { NEXT_PUBLIC_GOOGLE_MAPS_API_KEY } from '@/service/api/config'
 
 const containerStyle = {
   width: '100%',
@@ -55,7 +56,7 @@ export const LocationPicker = ({ onLocationSelect }) => {
 
   return (
     <LoadScript
-      googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}
+      googleMapsApiKey={NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}
       libraries={['places']}
     >
       <div className="relative z-10">
