@@ -24,7 +24,7 @@ const useUserStore = create((set) => ({
       const res = await api.patch('/users/profile', data, {
         headers: { Authorization: `Bearer ${token}` },
       })
-      set({ profile: res.data, userLoading: false })
+      set({ profile: res.data.data, userLoading: false })
     } catch (err) {
       set({ error: err, userLoading: false })
     }
