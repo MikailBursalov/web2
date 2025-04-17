@@ -4,6 +4,7 @@ import { useAuth } from '@/service/providers/AuthProvider'
 import { useEffect, useRef, useState } from 'react'
 import { ChevronDownIcon } from 'lucide-react'
 import useUserStore from '@/service/stores/useUser.store'
+import { PasswordChanger } from '@/components/root/profile/PasswordChanger'
 
 const genderData = [
   { title: 'мужской', value: 'male' },
@@ -22,7 +23,6 @@ export const UserInfo = () => {
   )
   const [avatarFile, setAvatarFile] = useState(null)
   const [avatarPreview, setAvatarPreview] = useState('/placeholder/male.png')
-  const [isPasswordChangeOpen, setIsPasswordChangeOpen] = useState(false)
 
   const genderRef = useRef(null)
   const fileInputRef = useRef(null)
@@ -190,45 +190,7 @@ export const UserInfo = () => {
         </div>
       </div>
 
-      <div className="bg-white rounded-md p-10 my-4">
-        <div className="">
-          <div className="flex justify-between items-center gap-4">
-            <h1 className="text-xl font-bold">Данные входа</h1>
-            <button
-              className="bg-blue-500/20 text-blue-500 hover:bg-blue-500/30 py-2 px-5 rounded-md text-xl"
-              onClick={() => setIsPasswordChangeOpen((prev) => !prev)}
-            >
-              {isPasswordChangeOpen ? 'Сохранить' : 'Изменить пароль'}
-            </button>
-          </div>
-          <div className="bg-gray-500 h-[1px] w-full my-5" />
-        </div>
-        <div
-          className={`transition-all duration-500 overflow-hidden ${
-            isPasswordChangeOpen
-              ? 'max-h-[500px] opacity-100'
-              : 'max-h-0 opacity-0'
-          }`}
-        >
-          <div className="flex justify-between items-center gap-4 mt-4">
-            <input
-              type="password"
-              placeholder="Старый пароль"
-              className="flex-1 text-xl font-semibold border rounded-md py-2 px-3 border-slate-500"
-            />
-            <input
-              type="password"
-              placeholder="Новый пароль"
-              className="flex-1 text-xl font-semibold border rounded-md py-2 px-3 border-slate-500"
-            />
-            <input
-              type="password"
-              placeholder="Подтвердите пароль"
-              className="flex-1 text-xl font-semibold border rounded-md py-2 px-3 border-slate-500"
-            />
-          </div>
-        </div>
-      </div>
+      <PasswordChanger />
     </div>
   )
 }
