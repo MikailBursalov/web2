@@ -18,7 +18,7 @@ export const CatalogFilter = () => {
     setValue(newValue)
   }
   return (
-    <div>
+    <div className={`bg-white rounded-md h-full p-4`}>
       <Accordion type="multiple">
         <AccordionItem value="item-1">
           <AccordionTrigger>Тип аренды</AccordionTrigger>
