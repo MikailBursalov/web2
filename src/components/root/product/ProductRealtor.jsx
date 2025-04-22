@@ -35,13 +35,13 @@ export const ProductRealtor = ({ className }) => {
             <div
               className={`bg-gray-300 rounded-xl py-2 w-full flex justify-between items-center`}
             >
-              <div className={`pl-3 text-center`}>
+              <div className={`pl-3 text-center flex gap-4`}>
                 <h5>публикаций</h5>
                 <p className={`font-bold`}>22</p>
               </div>
               <div className={`pr-3 text-center`}>
                 <a
-                  className={`underline md:hover:text-blue-500 duration-300`}
+                  className={`md:hover:underline md:hover:text-blue-500 duration-300`}
                   href={`/realtors/1`}
                 >
                   Посмотреть профиль
