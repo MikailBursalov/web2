@@ -6,7 +6,7 @@ export default function RootLayout({ children }) {
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
-      <main className="flex-grow bg-gray-200">{children}</main>
+      <main className="flex-grow bg-gray-100">{children}</main>
       <Footer />
       <ChatBot />
     </div>

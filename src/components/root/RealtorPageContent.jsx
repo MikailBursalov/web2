@@ -1,5 +1,8 @@
 'use client'
 import { useEffect, useState } from 'react'
+import { ArrowLeftIcon } from 'lucide-react'
+import { SendMessageRealtor } from '@/components/root/realtors/SendMessageRealtor'
+import { useRouter } from 'next/navigation'
 
 const realtorsData = [
   {
@@ -62,13 +65,27 @@ const realtorsData = [
 ]
 export const RealtorPageContent = () => {
   const [realtorsList, setRealtorsList] = useState([])
-
-  useEffect(() => {
-    console.log('realtors page: ')
-  }, [])
+  const { push } = useRouter()
+  const TakeToRealtorsPage = () => {
+    push('/realtors')
+  }
   return (
-    <div>
-      <div>lfl</div>
+    <div className="max-w-screen-2xl mx-auto">
+      <div>
+        <button
+          onClick={TakeToRealtorsPage}
+          className="text-blue-600 flex gap-2 items-center cursor-pointer"
+        >
+          <ArrowLeftIcon />
+          <span>Все специалисты</span>
+        </button>
+      </div>
+      <div className="flex justify-between items-center w-full">
+        <div className={`w-3/4`}></div>
+        <div className="w-1/4">
+          <SendMessageRealtor />
+        </div>
+      </div>
     </div>
   )
 }
