@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { ArrowLeftIcon } from 'lucide-react'
 import { SendMessageRealtor } from '@/components/root/realtors/SendMessageRealtor'
 import { useRouter } from 'next/navigation'
+import { RealtorInfo } from '@/components/root/realtors/RealtorInfo'
 
 const realtorsData = [
   {
@@ -81,7 +82,9 @@ export const RealtorPageContent = () => {
         </button>
       </div>
       <div className="flex justify-between items-center w-full">
-        <div className={`w-3/4`}></div>
+        <div className={`w-3/4`}>
+          <RealtorInfo />
+        </div>
         <div className="w-1/4">
           <SendMessageRealtor />
         </div>
