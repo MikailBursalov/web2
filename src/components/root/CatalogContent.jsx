@@ -185,7 +185,7 @@ const catalogData = [
 export const CatalogContent = () => {
   const { push } = useRouter()
   return (
-    <div>
+    <div className={`bg-white px-8 py-4 rounded-md`}>
       <div className={`max-w-screen-2xl mx-auto`}>
         <div>
           <h1 className={`text-3xl font-semibold mb-3`}>

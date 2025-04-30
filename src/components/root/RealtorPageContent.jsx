@@ -81,11 +81,11 @@ export const RealtorPageContent = () => {
           <span>Все специалисты</span>
         </button>
       </div>
-      <div className="flex justify-between items-center w-full">
+      <div className="flex justify-between items-start w-full gap-4  ">
         <div className={`w-3/4`}>
           <RealtorInfo />
         </div>
-        <div className="w-1/4">
+        <div className="w-1/4 sticky">
           <SendMessageRealtor />
         </div>
       </div>

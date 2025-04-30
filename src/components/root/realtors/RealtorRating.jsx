@@ -13,8 +13,8 @@ export const RealtorRating = ({ rating = 2.4, reviews = 14 }) => {
           <Image
             src={'/realtors/boy-ava2.jpg'}
             alt="Realtor Rating"
-            width={50}
-            height={50}
+            width={120}
+            height={120}
           />
         </div>
         <div className="flex">
@@ -22,7 +22,7 @@ export const RealtorRating = ({ rating = 2.4, reviews = 14 }) => {
           {[...Array(fullStars)].map((_, i) => (
             <StarIcon
               key={`full-${i}`}
-              className="text-orange-400 fill-orange-400 w-5 h-5"
+              className="text-orange-400 fill-orange-400 w-6 h-6"
             />
           ))}
 
@@ -31,7 +31,7 @@ export const RealtorRating = ({ rating = 2.4, reviews = 14 }) => {
             <div className="relative w-5 h-5">
               <StarIcon className="text-gray-300 fill-gray-300 w-5 h-5" />
               <div className="absolute top-0 left-0 overflow-hidden w-1/2 h-full">
-                <StarIcon className="text-orange-400 fill-orange-400 w-5 h-5" />
+                <StarIcon className="text-orange-400 fill-orange-400 w-6 h-6" />
               </div>
             </div>
           )}
@@ -40,7 +40,7 @@ export const RealtorRating = ({ rating = 2.4, reviews = 14 }) => {
           {[...Array(emptyStars)].map((_, i) => (
             <StarIcon
               key={`empty-${i}`}
-              className="text-gray-300 fill-gray-300 w-5 h-5"
+              className="text-gray-300 fill-gray-300 w-6 h-6"
             />
           ))}
         </div>
