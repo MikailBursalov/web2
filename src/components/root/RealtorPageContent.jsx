@@ -81,7 +81,7 @@ export const RealtorPageContent = () => {
           <span>Все специалисты</span>
         </button>
       </div>
-      <div className="flex justify-between items-start w-full gap-4  ">
+      <div className="flex justify-between items-start w-full gap-4 mt-7 ">
         <div className={`w-3/4`}>
           <RealtorInfo />
         </div>
