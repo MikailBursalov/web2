@@ -11,7 +11,7 @@ export const RealtorRating = ({ rating = 2.4, reviews = 14 }) => {
       <div>
         <div>
           <Image
-            src={'/realtors/boy-ava2.jpg'}
+            src={'/realtor/boy-ava2.jpg'}
             alt="Realtor Rating"
             width={120}
             height={120}

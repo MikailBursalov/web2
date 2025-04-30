@@ -9,7 +9,7 @@ export const ProductRealtor = ({ className }) => {
         <div className="flex items-center justify-center flex-col">
           <div className={`size-28`}>
             <Image
-              src={'/realtors/boy-ava2.jpg'}
+              src={'/realtor/boy-ava2.jpg'}
               alt={'avatar'}
               width={50}
               height={50}

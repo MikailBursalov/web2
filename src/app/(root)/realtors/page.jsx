@@ -1,7 +1,5 @@
+import { RealtorsContent } from '@/components/root/realtorsPage/RealtorsContent'
+
 export default function RealtorsPage() {
-  return (
-    <div>
-      <div>Realtors</div>
-    </div>
-  )
+  return <RealtorsContent />
 }
