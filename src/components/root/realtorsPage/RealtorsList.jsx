@@ -33,6 +33,75 @@ const realtors = [
     about:
       'Всегда на связи, гарантирую прозрачность и честность в каждой сделке.',
   },
+  {
+    id: 104,
+    name: 'Айгуль Сатарова',
+    avatar: 'https://i.pravatar.cc/60?u=r4',
+    rating: 4.5,
+    reviews: 7,
+    listings: 12,
+    about:
+      'Работаю с жилой и загородной недвижимостью. Индивидуальный подход к каждому клиенту.',
+  },
+  {
+    id: 105,
+    name: 'Нурсултан Жээнбеков',
+    avatar: 'https://i.pravatar.cc/60?u=r5',
+    rating: 4.7,
+    reviews: 15,
+    listings: 22,
+    about:
+      'Профессионально подбираю жильё по вашему запросу. Помогаю с оформлением документов.',
+  },
+  {
+    id: 106,
+    name: 'Бакыт Кудайбергенов',
+    avatar: 'https://i.pravatar.cc/60?u=r6',
+    rating: 4.4,
+    reviews: 6,
+    listings: 9,
+    about:
+      'Специализируюсь на аренде недвижимости. Быстро нахожу решения для арендаторов и владельцев.',
+  },
+  {
+    id: 107,
+    name: 'Эльмира Асанова',
+    avatar: 'https://i.pravatar.cc/60?u=r7',
+    rating: 4.9,
+    reviews: 18,
+    listings: 28,
+    about:
+      'Знаю рынок недвижимости как свои пять пальцев. Работаю на результат.',
+  },
+  {
+    id: 108,
+    name: 'Санжар Мырзабеков',
+    avatar: 'https://i.pravatar.cc/60?u=r8',
+    rating: 4.3,
+    reviews: 5,
+    listings: 10,
+    about:
+      'Пунктуальный и честный специалист. Открыт к любым вопросам и предложениям.',
+  },
+  {
+    id: 109,
+    name: 'Асель Жунусова',
+    avatar: 'https://i.pravatar.cc/60?u=r9',
+    rating: 4.6,
+    reviews: 9,
+    listings: 14,
+    about:
+      'Консультирую по ипотеке и юридическим вопросам. Помогаю найти лучший вариант.',
+  },
+  {
+    id: 110,
+    name: 'Кубанычбек Абдрасулов',
+    avatar: 'https://i.pravatar.cc/60?u=r10',
+    rating: 4.8,
+    reviews: 11,
+    listings: 19,
+    about: 'Работаю быстро, честно и с душой. Успешно провёл более 100 сделок.',
+  },
 ]
 
 export const RealtorsList = () => {
@@ -47,7 +116,6 @@ export const RealtorsList = () => {
           }}
           className="flex items-center justify-between border rounded-xl p-4 shadow-sm bg-white md:hover:bg-blue-100 duration-300 cursor-pointer"
         >
-          {/* Левая часть: Аватар + ФИО */}
           <div className="flex items-center gap-4 w-1/6">
             <img
               src={r.avatar}
@@ -82,7 +150,6 @@ export const RealtorsList = () => {
             <p className="text-gray-700 truncate">{r.about}</p>
           </div>
 
-          {/* Правая часть: Кол-во объявлений */}
           <div className="text-center w-1/6">
             <p className="text-xl font-bold text-blue-600">{r.listings}</p>
             <p className="text-sm text-gray-500">объявлений</p>
