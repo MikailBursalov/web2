@@ -7,12 +7,13 @@ export const RealtorRating = ({ rating = 2.4, reviews = 14 }) => {
   const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0)
 
   return (
-    <div>
-      <div>
+    <div className={`w-1/6`}>
+      <div className={`flex flex-col justify-center items-center`}>
         <div>
           <Image
-            src={'/realtor/boy-ava2.jpg'}
+            src={'/profilePhoto/1.jpg'}
             alt="Realtor Rating"
+            className={`rounded-full size-32`}
             width={120}
             height={120}
           />
@@ -52,12 +53,14 @@ export const RealtorRating = ({ rating = 2.4, reviews = 14 }) => {
         </div>
 
         <div className="mt-2">
-          <div className="bg-green-500/50 flex items-center gap-2 p-2 rounded-3xl">
+          <div className="bg-green-500/70 flex items-center gap-1 p-1 rounded-3xl">
             <StarIcon
               fill={'white'}
-              className="text-green-500 bg-green-500 p-0 rounded-full text-xl"
+              className="text-green-500 bg-green-500 p-0.5 rounded-full text-xl"
             />
-            <span>Супер арендатор</span>
+            <span className={`text-xs text-white font-semibold`}>
+              Супер арендатор
+            </span>
           </div>
         </div>
       </div>

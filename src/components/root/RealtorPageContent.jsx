@@ -65,7 +65,6 @@ const realtorsData = [
   },
 ]
 export const RealtorPageContent = () => {
-  const [realtorsList, setRealtorsList] = useState([])
   const { push } = useRouter()
   const TakeToRealtorsPage = () => {
     push('/realtors')
@@ -81,11 +80,11 @@ export const RealtorPageContent = () => {
           <span>Все специалисты</span>
         </button>
       </div>
-      <div className="flex justify-between items-start w-full gap-4 mt-7 ">
+      <div className="flex justify-between items-start w-full gap-4 mt-7 relative">
         <div className={`w-3/4`}>
           <RealtorInfo />
         </div>
-        <div className="w-1/4 sticky">
+        <div className="w-1/4 sticky top-4 mb-4">
           <SendMessageRealtor />
         </div>
       </div>
