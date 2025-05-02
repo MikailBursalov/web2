@@ -90,30 +90,34 @@ export const Reviews = () => {
   const hasHalf = rating % 1 >= 0.5
 
   return (
-    <div className="p-4">
+    <div className="">
       <div className="mt-10 p-4 border rounded-md">
         <h2 className="text-2xl font-bold mb-4">Отзывы о специалисте</h2>
 
-        <div className="flex items-center gap-4 mb-2">
-          <span className="text-2xl font-semibold">{rating}</span>
-          <div className="flex items-center">
-            {[...Array(5)].map((_, index) => (
-              <Star
-                key={index}
-                size={20}
-                fill={index < rating ? '#facc15' : 'none'}
-                stroke="#facc15"
-                className="mr-1"
-              />
-            ))}
+        <div className={`flex justify-between items-start`}>
+          <div>
+            <div className="flex items-center gap-4 mb-2">
+              <span className="text-2xl font-semibold">{rating}</span>
+              <div className="flex items-center">
+                {[...Array(5)].map((_, index) => (
+                  <Star
+                    key={index}
+                    size={20}
+                    fill={index < rating ? '#facc15' : 'none'}
+                    stroke="#facc15"
+                    className="mr-1"
+                  />
+                ))}
+              </div>
+            </div>
+
+            <p className="text-gray-500 mb-4">Отзывы: {reviews.length}</p>
           </div>
+
+          <button className="mb-6 bg-blue-600 text-white px-4 py-2 rounded-xl hover:bg-blue-700 transition">
+            Добавить отзыв
+          </button>
         </div>
-
-        <p className="text-gray-500 mb-4">{reviews.length} отзыва</p>
-
-        <button className="mb-6 bg-blue-600 text-white px-4 py-2 rounded-xl hover:bg-blue-700 transition">
-          Добавить отзыв
-        </button>
 
         <div className="space-y-4">
           {reviews.map((review) => (

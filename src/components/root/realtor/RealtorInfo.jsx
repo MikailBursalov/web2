@@ -13,9 +13,7 @@ export const RealtorInfo = () => {
       <div>
         <RealtorDescription />
       </div>
-      <div className={`sticky`}>
-        <Reviews />
-      </div>
+      <Reviews />
     </div>
   )
 }
