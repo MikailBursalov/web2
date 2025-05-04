@@ -3,7 +3,7 @@ import { api } from '@/service/api/axios'
 
 const useUserStore = create((set) => ({
   profile: null,
-  UserLoading: false,
+  userLoading: false,
   error: null,
 
   fetchProfile: async (token) => {
@@ -24,6 +24,22 @@ const useUserStore = create((set) => ({
       const res = await api.patch('/users/profile', data, {
         headers: { Authorization: `Bearer ${token}` },
       })
+      set({ profile: res.data.data, userLoading: false })
+    } catch (err) {
+      set({ error: err, userLoading: false })
+    }
+  },
+
+  updateUserAvatar: async (token, data) => {
+    set({ userLoading: true, error: null })
+    try {
+      const res = await api.post('/users/avatar', data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'multipart/form-data',
+        },
+      })
+
       set({ profile: res.data.data, userLoading: false })
     } catch (err) {
       set({ error: err, userLoading: false })

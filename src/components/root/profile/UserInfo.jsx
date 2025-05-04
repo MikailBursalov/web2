@@ -13,7 +13,13 @@ const genderData = [
 ]
 
 export const UserInfo = () => {
-  const [userInfo, setUserInfo] = useState({ name: '', email: '' })
+  const [userInfo, setUserInfo] = useState({
+    name: '',
+    email: '',
+    phoneNumber: '',
+    avatar: '',
+    gender: '',
+  })
   const [genderSelectOpen, setGenderSelectOpen] = useState(false)
   const [selectedGenderValue, setSelectedGenderValue] = useState(
     genderData[2].value
@@ -28,7 +34,7 @@ export const UserInfo = () => {
   const fileInputRef = useRef(null)
 
   const { token } = useAuth()
-  const { profile, updateProfile } = useUserStore()
+  const { profile, updateProfile, updateUserAvatar } = useUserStore()
 
   const handleAvatarChange = (e) => {
     const file = e.target.files[0]
@@ -40,14 +46,32 @@ export const UserInfo = () => {
 
   const UpdateProfileData = async () => {
     const formData = new FormData()
-    formData.append('gender', selectedGenderValue)
-    formData.append('name', userInfo.name || profile?.name || '')
-    formData.append('email', userInfo.email || profile?.email || '')
+
     if (avatarFile) {
       formData.append('avatar', avatarFile)
+      await updateUserAvatar(token, formData)
+      return
     }
 
-    await updateProfile(token, formData)
+    if (userInfo.name && userInfo.name !== profile?.name) {
+      formData.append('name', userInfo.name)
+    }
+
+    if (userInfo.email && userInfo.email !== profile?.email) {
+      formData.append('email', userInfo.email)
+    }
+
+    if (userInfo.phoneNumber && userInfo.phoneNumber !== profile?.phoneNumber) {
+      formData.append('phoneNumber', userInfo.phoneNumber)
+    }
+
+    if (selectedGenderValue !== profile?.gender) {
+      formData.append('gender', selectedGenderValue)
+    }
+
+    if ([...formData.keys()].length > 0) {
+      await updateProfile(token, formData)
+    }
   }
 
   useEffect(() => {
@@ -59,16 +83,23 @@ export const UserInfo = () => {
 
     if (profile) {
       console.log(profile)
-      setUserInfo({ name: profile.name || '', email: profile.email || '' })
+      setUserInfo({
+        name: profile.name || '',
+        email: profile.email || '',
+        phoneNumber: profile.phoneNumber || '',
+      })
+
       if (profile.avatar) {
+        console.log('avatar', profile.avatar)
         setAvatarPreview(profile.avatar)
       }
-      setSelectedGenderValue(profile.gender || genderData[2].value)
-      setSelectedGenderTitle(profile.gender === 'male' ? 'мужской' : 'женский')
+
+      const genderObj = genderData.find((g) => g.value === profile.gender)
+      setSelectedGenderValue(genderObj?.value ?? genderData[2].value)
+      setSelectedGenderTitle(genderObj?.title ?? genderData[2].title)
     }
 
     document.addEventListener('mousedown', handleClickOutside)
-    console.log('onClickOutside', profile)
     return () => document.removeEventListener('mousedown', handleClickOutside)
   }, [profile])
 
@@ -137,7 +168,7 @@ export const UserInfo = () => {
         </div>
       </div>
 
-      <div className="bg-white rounded-md p-10 mt-4  ">
+      <div className="bg-white rounded-md p-10 mt-4">
         <h1 className="text-xl font-bold mb-4">Данные профиля</h1>
         <div className="bg-gray-500 h-[1px] w-full my-5" />
         <div className="flex items-center justify-between gap-4">
@@ -147,6 +178,13 @@ export const UserInfo = () => {
             </label>
             <input
               type="text"
+              value={userInfo.phoneNumber}
+              onChange={(e) =>
+                setUserInfo((prev) => ({
+                  ...prev,
+                  phoneNumber: e.target.value,
+                }))
+              }
               className="mt-2 text-xl font-semibold border rounded-md py-2 px-3 border-slate-500 w-full"
               placeholder="phone number"
             />
