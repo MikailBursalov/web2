@@ -6,9 +6,12 @@ import Link from 'next/link'
 import { useAuth } from '@/service/providers/AuthProvider'
 import Cookies from 'js-cookie'
 import { Skeleton } from '@/components/ui/skeleton'
+import useUserStore from '@/service/stores/useUser.store'
+import Image from 'next/image'
 
 export const ProfileNav = () => {
   const role = Cookies.get('role')
+  const { profile } = useUserStore()
 
   const navData = [
     {
@@ -32,7 +35,7 @@ export const ProfileNav = () => {
         }
       : null,
   ].filter(Boolean)
-
+  console.log(profile)
   const params = useParams()
   const { user, loading } = useAuth()
 
@@ -41,7 +44,21 @@ export const ProfileNav = () => {
       <div className="w-full">
         <div className="relative">
           <div className="bg-blue-500 h-32 w-full"></div>
-          <div className="absolute left-1/2 top-10 transform -translate-x-1/2 size-28 bg-gray-400 rounded-full"></div>
+          <div className="absolute left-1/2 top-10 transform -translate-x-1/2 ">
+            {!profile?.avatar ? (
+              <Image
+                src={profile?.avatar}
+                alt={'profile avatar'}
+                width={112}
+                height={112}
+                className={`size-28 bg-gray-400 rounded-full`}
+              />
+            ) : (
+              <Skeleton
+                className={`size-28 bg-gray-400 rounded-full`}
+              ></Skeleton>
+            )}
+          </div>
         </div>
         {loading ? (
           <div>
