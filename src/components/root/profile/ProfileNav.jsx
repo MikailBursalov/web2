@@ -40,18 +40,19 @@ export const ProfileNav = () => {
   const { user, loading } = useAuth()
 
   return (
-    <div className="bg-gray-100 rounded-md overflow-hidden">
+    <div className="bg-white rounded-md overflow-hidden">
       <div className="w-full">
         <div className="relative">
           <div className="bg-blue-500 h-32 w-full"></div>
           <div className="absolute left-1/2 top-10 transform -translate-x-1/2 ">
-            {!profile?.avatar ? (
+            {profile?.avatar ? (
               <Image
                 src={profile?.avatar}
                 alt={'profile avatar'}
-                width={112}
-                height={112}
-                className={`size-28 bg-gray-400 rounded-full`}
+                width={122}
+                height={122}
+                unoptimized
+                className={`size-28 bg-gray-400 rounded-full object-cover`}
               />
             ) : (
               <Skeleton
