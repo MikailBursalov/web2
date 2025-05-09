@@ -18,12 +18,14 @@ const data = [
 
 export const ApartmentType = ({ setValue, selectedTitle }) => {
   const [isOpen, setIsOpen] = useState(false)
+  const [selectedValue, setSelectedValue] = useState(null)
   const dropdownRef = useRef(null)
 
   const handleClick = (item) => {
     setValue((prev) => {
       return { ...prev, propertyType: item.value }
     })
+    setSelectedValue(item.title)
     setIsOpen(false)
   }
 
@@ -51,7 +53,7 @@ export const ApartmentType = ({ setValue, selectedTitle }) => {
             onClick={() => setIsOpen(!isOpen)}
           >
             <span className={``}>
-              {selectedTitle ? selectedTitle : 'ничего не выбрано'}
+              {selectedTitle ? selectedValue : 'ничего не выбрано'}
             </span>
             <ChevronDownIcon
               className={` transform transition-transform duration-300 ${

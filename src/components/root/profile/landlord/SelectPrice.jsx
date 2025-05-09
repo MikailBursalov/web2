@@ -16,11 +16,15 @@ const paymentPeriod = [
 
 export const SelectPrice = ({
   setValue,
+  selectedPrice,
   selectedCurrency,
   selectedPaymentPeriod,
 }) => {
   const [isCurrencyOpen, setIsCurrencyOpen] = useState(false)
   const [isPaymentPeriodOpen, setIsPaymentPeriodOpen] = useState(false)
+
+  const [localPaymentPeriod, setLocalPaymentPeriod] = useState(null)
+  const [localCurrency, setLocalCurrency] = useState(null)
 
   const currencyRef = useRef(null)
   const periodRef = useRef(null)
@@ -30,6 +34,7 @@ export const SelectPrice = ({
       ...prev,
       price: { ...prev.price, currency: item.value },
     }))
+    setLocalCurrency(item.title)
     setIsCurrencyOpen(false)
   }
 
@@ -38,6 +43,7 @@ export const SelectPrice = ({
       ...prev,
       price: { ...prev.price, paymentPeriod: item.value },
     }))
+    setLocalPaymentPeriod(item.title)
     setIsPaymentPeriodOpen(false)
   }
 
@@ -71,6 +77,13 @@ export const SelectPrice = ({
           <input
             type="text"
             placeholder={'цена'}
+            value={selectedPrice}
+            onChange={(e) => {
+              setValue((prev) => ({
+                ...prev,
+                price: { ...prev.price, amount: e.target.value },
+              }))
+            }}
             className={`w-full px-3 py-1 border border-blue-500 rounded-md focus:outline outline-blue-500`}
           />
         </div>
@@ -86,7 +99,11 @@ export const SelectPrice = ({
                 } rounded-md flex justify-between cursor-pointer`}
                 onClick={() => setIsCurrencyOpen(!isCurrencyOpen)}
               >
-                <span>{selectedCurrency || 'ничего не выбрано'}</span>
+                <span>
+                  {selectedCurrency !== null
+                    ? localCurrency
+                    : 'ничего не выбрано'}
+                </span>
                 <ChevronDownIcon
                   className={`transform transition-transform duration-300 ${
                     isCurrencyOpen
@@ -129,7 +146,11 @@ export const SelectPrice = ({
                 } rounded-md flex justify-between cursor-pointer`}
                 onClick={() => setIsPaymentPeriodOpen(!isPaymentPeriodOpen)}
               >
-                <span>{selectedPaymentPeriod || 'ничего не выбрано'}</span>
+                <span>
+                  {selectedPaymentPeriod !== null
+                    ? localPaymentPeriod
+                    : 'ничего не выбрано'}
+                </span>
                 <ChevronDownIcon
                   className={`transform transition-transform duration-300 ${
                     isPaymentPeriodOpen

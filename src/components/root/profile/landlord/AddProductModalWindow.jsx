@@ -17,8 +17,8 @@ export const AddProductModalWindow = ({ close }) => {
     location: {
       address: null,
       city: null,
-      district: null,
-      microDistrict: null,
+      // district: null,
+      // microDistrict: null,
     },
     price: { amount: null, currency: null, paymentPeriod: null },
     bedrooms: null,
@@ -31,13 +31,33 @@ export const AddProductModalWindow = ({ close }) => {
   const { token } = useAuth()
 
   const onSubmit = async () => {
-    console.log(data)
-    const response = await api.post('/properties', data, {
+    const formData = new FormData()
+
+    formData.append('title', data.title)
+    formData.append('description', data.description)
+    formData.append('propertyType', data.propertyType)
+    formData.append('location[address]', data.location.address)
+    formData.append('location[city]', data.location.city)
+    formData.append('price[amount]', data.price.amount)
+    formData.append('price[currency]', data.price.currency)
+    formData.append('price[paymentPeriod]', data.price.paymentPeriod)
+    formData.append('bedrooms', data.bedrooms)
+    formData.append('bathrooms', data.bathrooms)
+    formData.append('area', data.area)
+    data.amenities.forEach((item, index) => {
+      formData.append(`amenities`, item)
+    })
+    data.images.forEach((file, index) => {
+      formData.append(`images`, file)
+    })
+
+    const response = await api.post('/properties', formData, {
       headers: {
         Authorization: `Bearer ${token}`,
-        'content-type': 'multipart/form-data',
+        'Content-Type': 'multipart/form-data',
       },
     })
+
     if (response) {
       console.log(response)
     }
@@ -82,6 +102,7 @@ export const AddProductModalWindow = ({ close }) => {
                 />
                 <SelectPrice
                   setValue={setData}
+                  selectedPrice={data.price.amount}
                   selectedCurrency={data.price.currency}
                   selectedPaymentPeriod={data.price.paymentPeriod}
                 />

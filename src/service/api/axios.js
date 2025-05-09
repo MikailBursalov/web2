@@ -19,7 +19,7 @@ const refreshToken = async () => {
     return newAccessToken
   } catch (error) {
     console.error('Refresh token failed', error)
-    window.location.href = '/login'
+    // window.location.href = '/'
     throw error
   }
 }
