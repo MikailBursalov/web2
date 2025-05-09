@@ -8,6 +8,8 @@ import { ProductImages } from '@/components/root/profile/landlord/ProductImages'
 import { LocationPicker } from '@/components/root/profile/landlord/ProductLocation'
 import { api } from '@/service/api/axios'
 import { useAuth } from '@/service/providers/AuthProvider'
+import { FadeLoader } from 'react-spinners'
+import usePropertyStore from '@/service/stores/useProperty.store'
 
 export const AddProductModalWindow = ({ close }) => {
   const [data, setData] = useState({
@@ -27,6 +29,8 @@ export const AddProductModalWindow = ({ close }) => {
     amenities: [],
     images: [],
   })
+
+  const { loading, createProperty } = usePropertyStore()
 
   const { token } = useAuth()
 
@@ -51,15 +55,10 @@ export const AddProductModalWindow = ({ close }) => {
       formData.append(`images`, file)
     })
 
-    const response = await api.post('/properties', formData, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'multipart/form-data',
-      },
-    })
-
+    const response = await createProperty(token, formData)
     if (response) {
-      console.log(response)
+      console.log('true')
+      close()
     }
   }
 
@@ -141,10 +140,11 @@ export const AddProductModalWindow = ({ close }) => {
           </div>
         </div>
         <button
-          className={`bg-blue-500 px-5 text-white text-xl rounded-md py-1 md:hover:bg-blue-500/30 md:hover:text-blue-500 md:hover:border md:hover:border-blue-500 w-full text-center mt-10 duration-300`}
+          className={`bg-blue-500 px-5 text-white text-2xl font-semibold rounded-md ${!loading ? 'md:hover:bg-blue-500/10 md:hover:text-blue-500 md:hover:border md:hover:border-blue-500 py-3' : 'py-0'} w-full text-center mt-10 duration-300`}
           onClick={onSubmit}
+          disabled={loading}
         >
-          Подать объявление
+          {!loading ? 'Подать объявление' : <FadeLoader color={'white'} />}
         </button>
       </div>
     </div>
