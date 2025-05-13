@@ -2,6 +2,8 @@
 import Image from 'next/image'
 import { DotIcon, HeartIcon } from 'lucide-react'
 import { useRouter } from 'next/navigation'
+import usePropertyStore from '@/service/stores/useProperty.store'
+import { useEffect } from 'react'
 
 const suggestedListingsData = [
   {
@@ -104,10 +106,16 @@ const suggestedListingsData = [
 
 export const SuggestedListings = () => {
   const { push } = useRouter()
-
+  const { fetchRecommendedProperties, recommendedProperties } =
+    usePropertyStore()
+  console.log('11: ', recommendedProperties)
   const handleClickProduct = (id) => {
     push(`/catalog/${id}`)
   }
+
+  useEffect(() => {
+    fetchRecommendedProperties()
+  }, [])
   return (
     <section className={`my-5`}>
       <div className={`max-w-screen-2xl mx-auto px-2`}>
@@ -118,43 +126,53 @@ export const SuggestedListings = () => {
         </div>
         <div>
           <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {suggestedListingsData.map((item, id) => (
+            {recommendedProperties?.map((item, id) => (
               <li
                 key={id}
-                onClick={() => handleClickProduct(item.id)}
-                className="overflow-hidden border rounded-xl border-black cursor-pointer"
+                onClick={() => handleClickMyProperty(item.id)}
+                className="overflow-hidden border rounded-sm   border-black w-full cursor-pointer group" // Убрали max-w-[330px] и добавили w-full
               >
                 <div>
-                  <div className="relative max-h-[290px] overflow-hidden rounded-t-xl">
+                  <div className="relative w-full h-[250px] overflow-hidden">
                     <Image
-                      src={item.image}
-                      alt={item.address || 'Фото квартиры'}
-                      width={330} // Укажи реальные размеры, если знаешь
-                      height={290}
-                      className="w-full h-auto object-cover aspect-square"
+                      src={item.images[0]}
+                      alt={item.location.address || 'Фото квартиры'}
+                      fill
+                      sizes={'100vh'}
+                      className="object-cover w-full h-full md:group-hover:scale-105 duration-1000"
                     />
                     <span className="absolute top-2 right-2 bg-black/50 md:hover:bg-black/70 cursor-pointer duration-300 p-2 rounded-full">
                       <HeartIcon className="text-white size-4" />
                     </span>
                   </div>
-                  <div className="p-4">
-                    <h2 className="text-lg font-bold">
-                      {item.paymentPeriod === 'month'
-                        ? `${item.price} ⃀/мес.`
-                        : `${item.price} ⃀/год`}
-                    </h2>
 
-                    <div className="flex items-center text-gray-600 text-sm">
-                      <span>{item.roomCount}-комн. кв.</span>
+                  <div className="p-4 ">
+                    <h2 className="text-md font-bold ">
+                      {['daily', 'weekly', 'monthly', 'yearly'].includes(
+                        item?.price?.paymentPeriod
+                      )
+                        ? `${item?.price?.amount} ${item?.price?.currency === 'USD' ? '$/день' : 'C/день'}`
+                        : 'цена не указана'}
+                    </h2>
+                    <h3 className={`text-sm font-semibold `}>{item?.title}</h3>
+
+                    <div className="flex items-center text-gray-600 text-xs">
+                      <span>{item.bedrooms}-спалня</span>
+                      <DotIcon />
+                      <span>{item.bathrooms}-ванны</span>
                       <DotIcon />
                       <span>{item.area} м²</span>
-                      <DotIcon />
-                      <span>
-                        {item.floor} / {item.totalFloors} этаж
+                    </div>
+                    <div>
+                      <span className={`line-clamp-1 text-xs`}>
+                        {item?.location?.address}
                       </span>
                     </div>
                     <div>
-                      <span className={`line-clamp-1`}>{item.address}</span>
+                      <h1 className={`text-xs mt-4`}>Дополнительно:</h1>
+                      <div className="">
+                        <p>{item?.amenities?.join(', ')}</p>
+                      </div>
                     </div>
                   </div>
                 </div>

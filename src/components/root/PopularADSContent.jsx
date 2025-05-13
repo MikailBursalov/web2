@@ -1,8 +1,9 @@
 'use client'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { DotIcon, HeartIcon } from 'lucide-react'
 import { useRouter } from 'next/navigation'
+import usePropertyStore from '@/service/stores/useProperty.store'
 
 const popularAds = [
   {
@@ -106,44 +107,49 @@ const popularAds = [
 export const PopularADSContent = () => {
   const selling = ['Жилая', 'Загородная', 'Коммерческая']
   const [selectedSelling, setSelectedSelling] = useState('Жилая')
+  const { popularProperties, fetchPopularProperties } = usePropertyStore()
 
   const { push } = useRouter()
   const handleClickProduct = (id) => {
     push(`/catalog/${id}`)
   }
+
+  useEffect(() => {
+    fetchPopularProperties()
+  }, [])
   return (
     <div>
       <div className={`flex justify-between items-center`}>
         <h1 className={`text-3xl font-semibold`}>Популярные объявления</h1>
         <span className={`text-blue-400 text-md`}>Как сюда попасть?</span>
       </div>
-      <div className={`flex justify-start gap-4 items-center my-4`}>
-        <h5 className={`text-xl font-semibold`}>Продажа : </h5>
-        <div className={`flex justify-between gap-5 items-center`}>
-          {selling.map((selling, index) => (
-            <p
-              key={index}
-              className={`${selectedSelling === selling ? 'border-b border-b-blue-500 font-semibold text-blue-500' : ''} text-md md:hover:border-b text-xl md:hover:border-b-slate-800 cursor-pointer duration-300`}
-              onClick={() => setSelectedSelling(selling)}
-            >
-              {selling}
-            </p>
-          ))}
-        </div>
-      </div>
+      {/*<div className={`flex justify-start gap-4 items-center my-4`}>*/}
+      {/*  <h5 className={`text-xl font-semibold`}>Продажа : </h5>*/}
+      {/*  <div className={`flex justify-between gap-5 items-center`}>*/}
+      {/*    {selling.map((selling, index) => (*/}
+      {/*      <p*/}
+      {/*        key={index}*/}
+      {/*        className={`${selectedSelling === selling ? 'border-b border-b-blue-500 font-semibold text-blue-500' : ''} text-md md:hover:border-b text-xl md:hover:border-b-slate-800 cursor-pointer duration-300`}*/}
+      {/*        onClick={() => setSelectedSelling(selling)}*/}
+      {/*      >*/}
+      {/*        {selling}*/}
+      {/*      </p>*/}
+      {/*    ))}*/}
+      {/*  </div>*/}
+      {/*</div>*/}
       <div>
         <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-          {popularAds.map((item, id) => (
+          {popularProperties?.map((item, id) => (
             <li
               key={id}
-              onClick={() => handleClickProduct(item.id)}
-              className="overflow-hidden border rounded-xl border-black w-full cursor-pointer group" // Убрали max-w-[330px] и добавили w-full
+              onClick={() => handleClickMyProperty(item.id)}
+              className="overflow-hidden border rounded-sm   border-black w-full cursor-pointer group" // Убрали max-w-[330px] и добавили w-full
             >
               <div>
-                <div className="relative w-full h-[250px] overflow-hidden rounded-t-xl">
+                <div className="relative w-full h-[280px] overflow-hidden">
                   <Image
-                    src={item.image}
-                    alt={item.address || 'Фото квартиры'}
+                    src={item.images[0]}
+                    alt={item.location.address || 'Фото квартиры'}
                     fill
                     sizes={'100vh'}
                     className="object-cover w-full h-full md:group-hover:scale-105 duration-1000"
@@ -154,23 +160,32 @@ export const PopularADSContent = () => {
                 </div>
 
                 <div className="p-4">
-                  <h2 className="text-lg font-bold">
-                    {item.paymentPeriod === 'month'
-                      ? `${item.price} ⃀/мес.`
-                      : `${item.price} ⃀/год`}
+                  <h2 className="text-md font-bold">
+                    {['daily', 'weekly', 'monthly', 'yearly'].includes(
+                      item?.price?.paymentPeriod
+                    )
+                      ? `${item?.price?.amount} ${item?.price?.currency === 'USD' ? '$/день' : 'C/день'}`
+                      : 'цена не указана'}
                   </h2>
+                  <h3 className={`text-sm font-semibold `}>{item?.title}</h3>
 
-                  <div className="flex items-center text-gray-600 text-sm">
-                    <span>{item.roomCount}-комн. кв.</span>
+                  <div className="flex items-center text-gray-600 text-xs">
+                    <span>{item.bedrooms}-спалня</span>
+                    <DotIcon />
+                    <span>{item.bathrooms}-ванны</span>
                     <DotIcon />
                     <span>{item.area} м²</span>
-                    <DotIcon />
-                    <span>
-                      {item.floor} / {item.totalFloors} этаж
+                  </div>
+                  <div>
+                    <span className={`line-clamp-1 text-xs`}>
+                      {item?.location?.address}
                     </span>
                   </div>
                   <div>
-                    <span className={`line-clamp-1`}>{item.address}</span>
+                    <h1 className={`text-xs mt-4`}>Дополнительно:</h1>
+                    <div className="">
+                      <p>{item?.amenities?.join(', ')}</p>
+                    </div>
                   </div>
                 </div>
               </div>
