@@ -120,7 +120,7 @@ export const PopularADSContent = () => {
   return (
     <div>
       <div className={`flex justify-between items-center`}>
-        <h1 className={`text-3xl font-semibold`}>Популярные объявления</h1>
+        <h1 className={`text-3xl font-semibold pb-5`}>Популярные объявления</h1>
         <span className={`text-blue-400 text-md`}>Как сюда попасть?</span>
       </div>
       {/*<div className={`flex justify-start gap-4 items-center my-4`}>*/}
@@ -142,7 +142,7 @@ export const PopularADSContent = () => {
           {popularProperties?.map((item, id) => (
             <li
               key={id}
-              onClick={() => handleClickMyProperty(item.id)}
+              onClick={() => handleClickProduct(item.id)}
               className="overflow-hidden border rounded-sm   border-black w-full cursor-pointer group" // Убрали max-w-[330px] и добавили w-full
             >
               <div>

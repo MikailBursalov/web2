@@ -2,7 +2,7 @@ import Image from 'next/image'
 import { DotIcon, StarIcon } from 'lucide-react'
 import { clsx } from 'clsx'
 
-export const ProductRealtor = ({ className }) => {
+export const ProductRealtor = ({ owner, className }) => {
   return (
     <div className={clsx('', className)}>
       <div className="bg-white p-3 w-full h-auto rounded-xl space-y-3 shadow-[0_2px_16px_rgba(0,0,0,0.2)]">
@@ -21,7 +21,7 @@ export const ProductRealtor = ({ className }) => {
           </div>
           <div className={`text-center`}>
             <span className={'text-gray-500'}>Арендатор</span>
-            <h1 className={`text-xl`}>Виктор Мельнин</h1>
+            <h1 className={`text-xl`}>{owner.name}</h1>
             <div className={`flex items-center justify-center text-lg`}>
               <span className={'text-yellow-400'}>4.8</span>
               <span className={`ml-1`}>

@@ -32,7 +32,7 @@ const procustImagesData = [
   { image: '/product/17.jpg', id: 17 },
   { image: '/product/18.jpg', id: 18 },
 ]
-export const ProductImages = () => {
+export const ProductImages = ({ images }) => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null)
 
   return (
@@ -50,10 +50,10 @@ export const ProductImages = () => {
           modules={[FreeMode, Navigation, Thumbs]}
           className="mySwiper2"
         >
-          {procustImagesData?.map((item) => (
-            <SwiperSlide key={item.id} className="aspect-[4/3] w-full">
+          {images?.map((item, i) => (
+            <SwiperSlide key={i} className="aspect-[4/3] w-full">
               <Image
-                src={item.image}
+                src={item || '/noImage.png'}
                 width={100}
                 height={100}
                 sizes={'100vw'}
@@ -75,10 +75,10 @@ export const ProductImages = () => {
           modules={[FreeMode, Navigation, Thumbs]}
           className="mySwiper"
         >
-          {procustImagesData?.map((item) => (
-            <SwiperSlide key={item.id} className="aspect-[1/1] w-full">
+          {images?.map((item, i) => (
+            <SwiperSlide key={i} className="aspect-[1/1] w-full">
               <Image
-                src={item.image}
+                src={item || '/noImage.png'}
                 width={100}
                 height={100}
                 sizes={'100vw'}

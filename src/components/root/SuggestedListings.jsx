@@ -108,7 +108,6 @@ export const SuggestedListings = () => {
   const { push } = useRouter()
   const { fetchRecommendedProperties, recommendedProperties } =
     usePropertyStore()
-  console.log('11: ', recommendedProperties)
   const handleClickProduct = (id) => {
     push(`/catalog/${id}`)
   }
@@ -129,7 +128,7 @@ export const SuggestedListings = () => {
             {recommendedProperties?.map((item, id) => (
               <li
                 key={id}
-                onClick={() => handleClickMyProperty(item.id)}
+                onClick={() => handleClickProduct(item.id)}
                 className="overflow-hidden border rounded-sm   border-black w-full cursor-pointer group" // Убрали max-w-[330px] и добавили w-full
               >
                 <div>
